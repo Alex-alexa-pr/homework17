@@ -17,6 +17,7 @@ form.onsubmit = (event) => {
     errorMessage.innerHTML = "Please, enter valid nickname";
       return;
     }
+    submitForm();
 }
 
 todoItem.oninput = () => {
@@ -26,13 +27,7 @@ todoItem.oninput = () => {
     errorMessage.innerHTML = "";
   }
 };
-
-addBtn.addEventListener("click", submitForm);
-
-function submitForm() {
-  if (isEmptyField(todoItem)) {
-  }
- else {
+function addTodo(){
   const inputValue = todoItemValue.value;
   const listItemNode = document.createElement('li');
   const itemButtonNode = document.createElement('button');
@@ -43,8 +38,14 @@ function submitForm() {
   listItemNode.append(itemButtonNode);
   listNode.append(listItemNode);
   todoItemValue.value = "";
- }
+}
 
+function submitForm() {
+  if (isEmptyField(todoItem)) {
+  }
+ else {
+  addTodo();
+ }
 }
 
 listNode.addEventListener("click", (event) => {
