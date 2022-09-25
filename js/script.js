@@ -10,6 +10,7 @@ const listNode = document.getElementById("list");
 const isEmptyField = (field) => {
   return field.value.trim().length === 0;
 };
+
 form.onsubmit = (event) => {
   event.preventDefault();
   if (isEmptyField(todoItem)) {
@@ -17,7 +18,10 @@ form.onsubmit = (event) => {
     errorMessage.innerHTML = "Please, enter valid nickname";
       return;
     }
-    submitForm();
+   else {
+    addTodo(todoItemValue.value);
+    todoItemValue.value = "";
+   }
 }
 
 todoItem.oninput = () => {
@@ -27,25 +31,16 @@ todoItem.oninput = () => {
     errorMessage.innerHTML = "";
   }
 };
-function addTodo(){
-  const inputValue = todoItemValue.value;
+
+function addTodo(value){
   const listItemNode = document.createElement('li');
   const itemButtonNode = document.createElement('button');
   itemButtonNode.classList.add("remove-button");
   listItemNode.classList.add("listItem");
-  listItemNode.innerHTML = inputValue;
+  listItemNode.innerHTML = value;
   itemButtonNode.innerHTML = "delete";
   listItemNode.append(itemButtonNode);
   listNode.append(listItemNode);
-  todoItemValue.value = "";
-}
-
-function submitForm() {
-  if (isEmptyField(todoItem)) {
-  }
- else {
-  addTodo();
- }
 }
 
 listNode.addEventListener("click", (event) => {
